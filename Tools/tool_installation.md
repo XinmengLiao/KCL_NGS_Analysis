@@ -2,9 +2,9 @@
 
 https://brew.sh/
 
-Follow the instructions on Homebrew offcial website.  
+1. Follow the instructions on Homebrew offcial website.  
 
-Follow the instructions (if showed) after successful installation.  e.g. 
+2. Follow the instructions (if showed) after successful installation.  e.g. 
 
     **==> Next steps:**
 
@@ -16,11 +16,9 @@ Follow the instructions (if showed) after successful installation.  e.g.
 
 - Run **brew help** to get started
 
-Test installation by `brew help`
+3. Test installation by `brew help`
 
-![](/Users/xinmengliao/Library/Application%20Support/marktext/images/2023-10-18-17-23-35-image.png)
 
-#### 
 
 
 
@@ -34,7 +32,6 @@ Test installation by `brew help`
 
 4. fastqc installation: `brew install fastqc`
 
-#### 
 
 
 
@@ -54,9 +51,6 @@ Test installation by `brew help`
 2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)[Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
 
 3. Test installation by `./gatk -help`
-   
-   ![](/Users/xinmengliao/Library/Application%20Support/marktext/images/2023-10-16-23-50-02-image.png)
-
 4. Create alias for bwa
 
     `vim ~/.zshrc`
@@ -71,14 +65,10 @@ Test installation by `brew help`
 
 1. Download the lastest version of `picard.jar` and unzip https://github.com/broadinstitute/picard/releases/download/3.1.0/picard.jar
 
-2. Test installation by ``
+2. Test installation by
    
    `java -jar picard.jar -h`
    
-   ![](/Users/xinmengliao/Library/Application%20Support/marktext/images/2023-10-16-23-56-37-image.png)
-
-#### 
-
 #### 
 
 #### BWA Installation
@@ -92,8 +82,6 @@ Test installation by `brew help`
 3. Compile BWA by `make`
 
 4. Test Installation `./bwa`
-
-![](/Users/xinmengliao/Library/Application%20Support/marktext/images/2023-10-17-01-16-28-image.png)
 
 5. Create alias for bwa
 
@@ -112,9 +100,6 @@ Test installation by `brew help`
    https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip
 
 2. Test installation by `./fastqc`
-
-![](/Users/xinmengliao/Library/Application%20Support/marktext/images/2023-10-17-10-14-20-image.png)
-
 3. Create alias for fastqc by 
 
     `vim ~/.zshrc`
