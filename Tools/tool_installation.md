@@ -30,8 +30,6 @@ https://brew.sh/
 
 3. samtools installation: `brew install samtools`
 
-4. fastqc installation: `brew install fastqc`
-
 
 
 
@@ -53,7 +51,7 @@ https://brew.sh/
 3. Test installation by `./gatk -help`
 4. Create alias for bwa
 
-    `vim ~/.zshrc`
+    `vim ~/.zshrc` or `vim ~/.bashrc` 
 
     `alias fastqc="<PATH>/gatk"`
 
@@ -85,7 +83,7 @@ https://brew.sh/
 
 5. Create alias for bwa
 
-    `vim ~/.zshrc`
+    `vim ~/.zshrc` or `vim ~/.bashrc`
 
     `alias fastqc="<PATH>/bwa"`
 
@@ -102,7 +100,7 @@ https://brew.sh/
 2. Test installation by `./fastqc`
 3. Create alias for fastqc by 
 
-    `vim ~/.zshrc`
+    `vim ~/.zshrc` or `vim ~/.bashrc`
 
     `alias fastqc="<PATH>/fastqc"`
 
