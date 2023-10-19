@@ -104,4 +104,5 @@
 ## extract SNPs & INDELS
 
 `gatk SelectVariants -R reference_genome.fa -V variants_result.vcf --select-type SNP -O raw_snps.vcf`
+
 `gatk SelectVariants -R reference_genome.fa -V variants_result.vcf --select-type INDEL -O raw_indels.vcf`
