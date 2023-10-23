@@ -42,19 +42,11 @@
 
 ## change SAM file into BAM file, reorder BAM file
 
-`java -jar picard.jar SortSam \
- VALIDATION_STRINGENCY=LENIENT \
- INPUT=result.sam \
- OUTPUT=sorted_file.bam \
- SORT_ORDER=coordinate`
+`java -jar picard.jar SortSam VALIDATION_STRINGENCY=LENIENT INPUT=result.sam OUTPUT=sorted_file.bam SORT_ORDER=coordinate`
 
 ## mark dupliates
 
-`java -jar picard.jar MarkDuplicates \
- INPUT=sorted_file.bam \
- OUTPUT= sorted_and_marked_file.bam \
- METRICS_FILE=metrics.txt \
- VALIDATION_STRINGENCY=LENIENT`
+`java -jar picard.jar MarkDuplicates INPUT=sorted_file.bam OUTPUT= sorted_and_marked_file.bam METRICS_FILE=metrics.txt VALIDATION_STRINGENCY=LENIENT`
 
 ## check the statistics of duplicated file
 
@@ -64,14 +56,7 @@
 
 ## Add read groups
 
-`java -Xmx16g -jar picard.jar AddOrReplaceReadGroups \
- INPUT=sorted_and_marked_file.bam \
- OUTPUT=final_result.bam SORT_ORDER=coordinate \
- RGID=short-id \
- RGLB=short-lib \
- RGPL=ILLUMINA \
- RGPU=short-01 \
- RGSM=short`
+`java -Xmx16g -jar picard.jar AddOrReplaceReadGroups INPUT=sorted_and_marked_file.bam OUTPUT=final_result.bam SORT_ORDER=coordinate  RGID=short-id RGLB=short-lib RGPL=ILLUMINA RGPU=short-01 RGSM=short`
 
 ## build BAM index
 
@@ -88,9 +73,7 @@
 
 ## build reference dictionary for PICARD
 
-`java -jar picard.jar CreateSequenceDictionary \
- R=reference_genome.fa \
- O=reference_genome.dict`
+`java -jar picard.jar CreateSequenceDictionary R=reference_genome.fa O=reference_genome.dict`
 
 ## build referenece index
 
@@ -98,10 +81,7 @@
 
 ## call variants
 
-`gatk HaplotypeCaller \
- -R reference_genome.fa \
- -I result_recal.bam \
- -O variants_result.vcf`
+`gatk HaplotypeCaller -R reference_genome.fa -I result_recal.bam -O variants_result.vcf`
 
 ## check variants file
 
