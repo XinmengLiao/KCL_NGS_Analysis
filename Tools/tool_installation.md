@@ -46,7 +46,7 @@ https://brew.sh/
      - R 3.2.5 (needed for producing plots in certain tools)
 
 2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
-3. Test installation by `./gatk -help`
+3. Go to the gatk.4.4.0.0 folder by `cd <path>` (the path where you download gatk.4.4.0.0), then test installation by `./gatk -help`
 4. Create alias for gatk
 
     `vim ~/.zshrc` or `vim ~/.bashrc`   (depends on your own terminal environmemt)
