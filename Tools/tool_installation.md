@@ -33,7 +33,7 @@ https://brew.sh/
 
 
 
-#### GATK Installation (MacOS)
+#### GATK Installation
 
 1. Check the compulsory softwares and version.  
    
