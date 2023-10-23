@@ -49,7 +49,7 @@ https://brew.sh/
 3. Test installation by `./gatk -help`
 4. Create alias for gatk
 
-    `vim ~/.zshrc` or `vim ~/.bashrc` 
+    `vim ~/.zshrc` or `vim ~/.bashrc`   (depends on your own terminal environmemt)
 
     `alias fastqc="<PATH>/gatk"`
 
