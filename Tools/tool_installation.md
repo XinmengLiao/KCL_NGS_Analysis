@@ -47,7 +47,7 @@ https://brew.sh/
 
 2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
 3. Test installation by `./gatk -help`
-4. Create alias for bwa
+4. Create alias for gatk
 
     `vim ~/.zshrc` or `vim ~/.bashrc` 
 
