@@ -10,7 +10,7 @@ https://brew.sh/
 
 - Run these two commands in your terminal to add Homebrew to your **PATH**:
 
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/xinmengliao/.zprofile
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ....... (based on your own laptop)
 
     eval "$(/opt/homebrew/bin/brew shellenv)"
 
