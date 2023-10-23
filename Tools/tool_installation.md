@@ -39,15 +39,13 @@ https://brew.sh/
    
    - To run GATK:
      - Java 17 is needed to run or build GATK. We recommend one of the following:
-       - Download the Eclipse Foundation's distribution of OpenJDK 17 from [adoptium.net](https://adoptium.net/). Navigate to the [release archive](https://adoptium.net/temurin/archive/?version=17) to find downloads for Java 17.
        - On Mac OS, you can install the [Homebrew package manager](https://brew.sh/) and run `brew tap homebrew/cask-versions` followed by `brew install --cask temurin17` to install the Eclipse Foundation's OpenJDK 17.
      - Python 2.6 or greater (required to run the `gatk` frontend script)
      - Python 3.6.2, along with a set of additional Python packages, is required to run some tools and workflows. See [Python Dependencies](https://github.com/broadinstitute/gatk#python) for more information. 
        - Python could also be installed by homebrew. 
      - R 3.2.5 (needed for producing plots in certain tools)
 
-2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)[Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
-
+2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
 3. Test installation by `./gatk -help`
 4. Create alias for bwa
 
