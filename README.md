@@ -12,9 +12,9 @@
 
 ## Reference genome
 
-`wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz`
+`wget https://ftp.ensembl.org/pub/release-110/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.chromosome.1.fa.gz`
 
-`gunzip hg38.fa.gz`
+`gunzip Homo_sapiens.GRCh38.dna.chromosome.1.fa.gz`
 
 `mv hg38.fa reference_genome.fa`
 
