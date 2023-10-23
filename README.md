@@ -5,23 +5,29 @@
 ## Fastq files
 
 `wget https://github.com/XinmengLiao/KCL_NGS_Analysis/raw/main/Reads/short_1.fastq.zip`
+
 `wget https://github.com/XinmengLiao/KCL_NGS_Analysis/raw/main/Reads/short_2.fastq.zip`
+
 `unzip *.zip`
 
 ## Reference genome
 
 `wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz`
+
 `gunzip hg38.fa.gz`
+
 `mv hg38.fa reference_genome.fa`
 
 ## Known sites files for BQSR from GATK resource bundle
 
 `wget https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf`
+
 `wget https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.idx`
 
 ## 2. FastQC check the sequneces quality
 
 `fastqc short_1.fastq`
+
 `fastqc short_2.fastq`
 
 ## 3.Index reference genome
