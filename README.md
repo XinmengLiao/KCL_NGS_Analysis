@@ -2,14 +2,6 @@
 
 ## 1. Download files
 
-## Fastq files
-
-`wget https://github.com/XinmengLiao/KCL_NGS_Analysis/raw/main/Reads/short_1.fastq.zip`
-
-`wget https://github.com/XinmengLiao/KCL_NGS_Analysis/raw/main/Reads/short_2.fastq.zip`
-
-`unzip *.zip`
-
 ## Reference genome
 
 `wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz`
