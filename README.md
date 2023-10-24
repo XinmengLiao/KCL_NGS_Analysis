@@ -48,11 +48,11 @@
 
 ## Add read groups
 
-`java -Xmx16g -jar picard.jar AddOrReplaceReadGroups INPUT=sorted_and_marked_file.bam OUTPUT=final_result.bam SORT_ORDER=coordinate  RGID=short-id RGLB=short-lib RGPL=ILLUMINA RGPU=short-01 RGSM=short`
+`java -jar picard.jar AddOrReplaceReadGroups INPUT=sorted_and_marked_file.bam OUTPUT=final_result.bam SORT_ORDER=coordinate  RGID=short-id RGLB=short-lib RGPL=ILLUMINA RGPU=short-01 RGSM=short`
 
 ## build BAM index
 
-`java -Xmx16g -jar picard.jar BuildBamIndex INPUT=final_result.bam`
+`java -jar picard.jar BuildBamIndex INPUT=final_result.bam`
 
 
 ## 7. Recalibrating base scores
