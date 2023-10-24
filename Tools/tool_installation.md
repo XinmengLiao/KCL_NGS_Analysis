@@ -83,7 +83,7 @@ https://brew.sh/
 
     `vim ~/.zshrc` or `vim ~/.bashrc`
 
-    `alias fastqc="<PATH>/bwa"`
+    `alias bwa="<PATH>/bwa"`
 
 #### 
 
