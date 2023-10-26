@@ -47,7 +47,11 @@ https://brew.sh/
 
 2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
 3. Go to the gatk.4.4.0.0 folder by `cd <path>` (the path where you download gatk.4.4.0.0), then test installation by `./gatk -help`
-4. Create alias for gatk
+   If you have errors like:
+   'env: python: No such file or directory' or 'ln: /usr/bin/python: Operation not permitted',
+   try to open gatk.unix with TextEdit, and change the first line '#!/usr/bin/env python' to '#!/usr/bin/env python3'.
+   run `./gatk -help` once again to test the installation. 
+5. Create alias for gatk
 
     `vim ~/.zshrc` or `vim ~/.bashrc`   (depends on your own terminal environmemt)
 
