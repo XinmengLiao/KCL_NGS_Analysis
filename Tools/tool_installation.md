@@ -1,4 +1,5 @@
-#### Homebrew Installation
+(2023-10-26 updated)
+#### Homebrew Installation   
 
 https://brew.sh/
 
@@ -46,12 +47,12 @@ https://brew.sh/
      - R 3.2.5 (needed for producing plots in certain tools)
 
 2. Download the lastest version and unzip [Releases · broadinstitute/gatk · GitHub](https://github.com/broadinstitute/gatk/releases)
-3. Go to the gatk.4.4.0.0 folder by `cd <path>` (the path where you download gatk.4.4.0.0), then test installation by `./gatk -help`
+3. Go to the gatk.4.4.0.0 directory by `cd <path>` (the path where you download gatk.4.4.0.0), then test installation by `./gatk -help`.
    If you have errors like:
    'env: python: No such file or directory' or 'ln: /usr/bin/python: Operation not permitted',
-   try to open gatk.unix with TextEdit, and change the first line '#!/usr/bin/env python' to '#!/usr/bin/env python3'.
-   run `./gatk -help` once again to test the installation. 
-5. Create alias for gatk
+   try to open <gatk.unix> in gatk.4.4.0.0 directory with TextEdit, and change the first line '#!/usr/bin/env python' to '#!/usr/bin/env python3'.
+   Run `./gatk -help` once again to test the installation. 
+4. Create alias for gatk
 
     `vim ~/.zshrc` or `vim ~/.bashrc`   (depends on your own terminal environmemt)
 
