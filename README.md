@@ -4,23 +4,18 @@
 
 ## Reference genome
 
-`wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz`
+https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
 
 (Reference genome for Chromosome 1 :
 https://www.ncbi.nlm.nih.gov/nuccore/CM000663.2/)
 
-`gunzip hg38.fa.gz`
-
-`mv hg38.fa reference_genome.fa`
-
 
 ## Known sites files for BQSR from GATK resource bundle
 
-`wget https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf`
+https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf
 
-`wget https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.idx`
+https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.idx
 
-echo Variants calling starts at: `date +'%Y-%m-%d %H:%M:%S'`
 
 ##### directories
 
