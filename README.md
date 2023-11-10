@@ -1,6 +1,6 @@
-### NGS WORKFLOW
+### NGS WORKFLOW (2023-11-10 updated)
 
-## 1. Download files
+## 0. Download files
 
 ## Reference genome
 
@@ -20,73 +20,145 @@ https://www.ncbi.nlm.nih.gov/nuccore/CM000663.2/)
 
 `wget https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf.idx`
 
-## 2. FastQC check the sequneces quality
+echo Variants calling starts at: `date +'%Y-%m-%d %H:%M:%S'`
 
-`fastqc short_1.fastq`
+##### directories
 
-`fastqc short_2.fastq`
+ref="/Users/xinmengliao/Documents/Courses/KCL_NGSworkshop2023/reference_genome.fa"
+known_sites="/Users/xinmengliao/Documents/Courses/KCL_NGSworkshop2023/Homo_sapiens_assembly38.dbsnp138.vcf"
+reads="/Users/xinmengliao/Documents/Courses/KCL_NGSworkshop2023/reads"
+results="/Users/xinmengliao/Documents/Courses/KCL_NGSworkshop2023/results"
+var='/Users/xinmengliao/Documents/Courses/KCL_NGSworkshop2023/variants'
+tools='/Users/xinmengliao/Documents/Courses/KCL_NGSworkshop2023/software'
 
-## 3.Index reference genome
+##---------------------------------------
 
-`bwa index reference_genome.fa`
+## 1. FastQC check the sequneces quality
 
-## 4. Align fastq files with the referene genome
+##---------------------------------------
 
-`bwa mem -M reference_genome.fa short_1.fastq short_2.fastq > result.sam`
+fastqc ${reads}/short_1.fastq -o ${reads}/
+fastqc ${reads}/short_2.fastq -o ${reads}/
 
-## 5. Mark duplicates
+##---------------------------
 
-## change SAM file into BAM file, reorder BAM file
+## 2.Index reference genome
 
-`java -jar picard.jar SortSam VALIDATION_STRINGENCY=LENIENT INPUT=result.sam OUTPUT=sorted_file.bam SORT_ORDER=coordinate`
+##---------------------------
 
-## mark dupliates
+echo "STEP 2: Map to reference using BWA-MEM."
 
-`java -jar picard.jar MarkDuplicates INPUT=sorted_file.bam OUTPUT= sorted_and_marked_file.bam METRICS_FILE=metrics.txt VALIDATION_STRINGENCY=LENIENT`
+##### create index for reference genome
 
-## check the statistics of duplicated file
+${tools}/bwa/bwa index reference_genome.fa
 
-`samtools flagstat sorted_and_marked_file.bam`
+##### map raw reads to reference genome
 
-## 6. Realignment
+${tools}/bwa/bwa mem -M ${ref} ${reads}/short_1.fastq ${reads}/short_2.fastq > ${results}/mapped_result.sam
 
-## Add read groups
+##------------------------------------------------
 
-`java -jar picard.jar AddOrReplaceReadGroups INPUT=sorted_and_marked_file.bam OUTPUT=final_result.bam SORT_ORDER=coordinate  RGID=short-id RGLB=short-lib RGPL=ILLUMINA RGPU=short-01 RGSM=short`
+## 3. SAM --> BAM, add read groups
 
-## build BAM index
+##------------------------------------------------
 
-`java -jar picard.jar BuildBamIndex INPUT=final_result.bam`
+echo "STEP 3: SAM --> BAM, add read groups."
 
+##### change SAM file into BAM file, reorder BAM file
 
-## 7. Recalibrating base scores
-## build reference dictionary for PICARD
+java -jar ${tools}/picard.jar SortSam \
+ VALIDATION_STRINGENCY=LENIENT \
+ INPUT=${results}/mapped_result.sam \
+ OUTPUT=${results}/sorted_mapped_result.bam \
+ SORT_ORDER=coordinate
 
-`java -jar picard.jar CreateSequenceDictionary R=reference_genome.fa O=reference_genome.dict`
+##### Add read groups
 
-## build referenece index
+java -Xmx16g -jar ${tools}/picard.jar AddOrReplaceReadGroups \
+ INPUT=${results}/sorted_mapped_result.bam \
+ OUTPUT=${results}/grouped_mapped_sorted_result.bam SORT_ORDER=coordinate \
+ RGID=short-id \
+ RGLB=short-lib \
+ RGPL=ILLUMINA \
+ RGPU=short-01 \
+ RGSM=short
 
-`samtools faidx reference_genome.fa`
+##------------------------------------------------
 
-##  Recalibration
+## 4. Mark duplicates
 
-`gatk BaseRecalibrator –R reference_genome.fa -I final_result.bam –known-sites Homo_sapiens_assembly38.dbsnp138.vcf –O result_recal.table`
+##------------------------------------------------
 
-`gatk ApplyBQSR -I final_result.bam –R reference_genome.fa --bqsr-recal-file result_recal.table -O result_recal.bam`
+echo "STEP 4: Mark duplicates."
 
+##### mark dupliates
 
-## 8. Calling variants
+java -jar ${tools}/picard.jar MarkDuplicates \
+ INPUT=${results}/grouped_mapped_sorted_result.bam \
+ OUTPUT= ${results}/marked_result.bam \
+ METRICS_FILE=metrics.txt \
+ VALIDATION_STRINGENCY=LENIENT
 
-## call variants
+##### check the statistics of duplicated file
 
-`gatk HaplotypeCaller -R reference_genome.fa -I result_recal.bam -O variants_result.vcf`
+${tools}/samtools-1.18/samtools flagstat ${results}/marked_result.bam > ${results}/MarkDuplicate_stat.txt
 
-## check variants file
+##------------------------------
 
-`less -S variants_result.vcf`
+## 5. Recalibrating base scores
 
-## extract SNPs & INDELS
+##------------------------------
 
-`gatk SelectVariants -R reference_genome.fa -V variants_result.vcf --select-type SNP -O raw_snps.vcf`
+echo "STEP 5: Base quality score recalibration (bqsr)."
 
-`gatk SelectVariants -R reference_genome.fa -V variants_result.vcf --select-type INDEL -O raw_indels.vcf`
+##### build reference dictionary for PICARD
+
+java -jar ${tools}/picard.jar CreateSequenceDictionary \
+ R=${ref} \
+ O=reference_genome.dict
+
+##### build referenece index
+
+${tools}/samtools-1.18/samtools faidx ${ref}
+
+##### create the recalibration table, which contains the recalibrated scores for each base
+
+${tools}/gatk-4.4.0.0/gatk BaseRecalibrator \
+ --known-sites ${known_sites} \
+ -R ${ref} \
+ -I ${results}/marked_result.bam \
+ -O ${results}/recalibrated_score.table
+
+##### apply the recalibrated scores to the BAM file for recalibration
+
+${tools}/gatk-4.4.0.0/gatk ApplyBQSR \
+ --bqsr-recal-file ${results}/recalibrated_score.table \
+ -I ${results}/marked_result.bam \
+ -O ${results}/final_bqsr_result.bam \
+ -R ${ref}
+
+##------------------------------------
+
+## 6. Common Calling variants (GATK)
+
+##------------------------------------
+
+echo "STEP 6: Calling Variants (GATK)."
+
+##### call variants
+
+${tools}/gatk-4.4.0.0/gatk HaplotypeCaller \
+ -R ${ref} \
+ -I ${results}/final_bqsr_result.bam \
+ -O ${var}/all_variants.vcf
+
+##### extract SNPs & INDELS
+
+${tools}/gatk-4.4.0.0/gatk SelectVariants \
+ -R ${ref} -V ${var}/all_variants.vcf \
+ --select-type SNP -O ${var}/raw_snps.vcf\
+
+${tools}/gatk-4.4.0.0/gatk SelectVariants \
+ -R ${ref} \
+ -V ${var}/all_variants.vcf \
+ --select-type INDEL -O ${var}/raw_indels.vcf
