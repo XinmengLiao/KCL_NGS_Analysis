@@ -87,7 +87,7 @@
 
 
 
-#### Homebrew Installation   
+#### （Optional）Homebrew Installation   
 
 https://brew.sh/
 
