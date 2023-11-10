@@ -38,8 +38,6 @@ https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo
 
 
 
-`echo "STEP 2: Map to reference using BWA-MEM."`
-
 **create index for reference genome**
 
 `${tools}/bwa/bwa index reference_genome.fa`
@@ -53,7 +51,6 @@ https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo
 ## 3. SAM --> BAM, add read groups
 
 
-`echo "STEP 3: SAM --> BAM, add read groups."`
 
 **change SAM file into BAM file, reorder BAM file**
 
@@ -68,8 +65,6 @@ https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo
 
 
 
-`echo "STEP 4: Mark duplicates."`
-
 **mark dupliates**
 
 `java -jar ${tools}/picard.jar MarkDuplicates INPUT=${results}/grouped_mapped_sorted_result.bam OUTPUT= ${results}/marked_result.bam METRICS_FILE=metrics.txt VALIDATION_STRINGENCY=LENIENT`
@@ -80,9 +75,6 @@ https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo
 
 ## 5. Recalibrating base scores
 
-
-
-`echo "STEP 5: Base quality score recalibration (bqsr)."`
 
 **build reference dictionary for PICARD**
 
@@ -104,8 +96,6 @@ https://storage.googleapis.com/genomics-public-data/resources/broad/hg38/v0/Homo
 
 ## 6. Common Calling variants (GATK)
 
-
-`echo "STEP 6: Calling Variants (GATK)."`
 
 **call variants**
 
